@@ -14,7 +14,7 @@ end
 
 def menu
   choice = nil
-  until choice = e
+  until choice == 'x'
     puts "Press '1' to add an employee"
     puts "Press '2' to list employees"
     puts "Press '3' to add a division"
@@ -43,7 +43,7 @@ end
 def add_employee
   puts "What is your employees name?"
   employee_name = gets.chomp
-  employee = Employee.new(:employee => employee_name)
+  employee = Employee.new(:name => employee_name)
   employee.save
   "'#{employee.name}' has been added to your employee list."
   end
@@ -57,7 +57,7 @@ end
 def add_division
   puts "What is your divisions name?"
   division_name = gets.chomp
-  division = Division.new(:division => division_name)
+  division = Division.new(:name => division_name)
   division.save
   "'#{division.name}' has been added to your division list."
   end
