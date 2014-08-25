@@ -19,6 +19,7 @@ def menu
     puts "Press '2' to list employees"
     puts "Press '3' to add a division"
     puts "Press '4' to list all divisions"
+    puts "Press '5' to list remote employees"
     puts "Press 'x' to exit the program"
     choice = gets.chomp
     case choice
@@ -30,6 +31,8 @@ def menu
       add_division
     when '4'
       list_division
+    when '5'
+      list_remote
     when 'x'
       puts "Good-bye"
       system 'clear'
@@ -46,7 +49,7 @@ def add_employee
   employee = Employee.new(:name => employee_name)
   employee.save
   "'#{employee.name}' has been added to your employee list."
-  end
+end
 
 def list_employee
   puts "Here is a list of all your employees:"
@@ -60,12 +63,21 @@ def add_division
   division = Division.new(:name => division_name)
   division.save
   "'#{division.name}' has been added to your division list."
-  end
+end
 
 def list_division
   puts "Here is a list of all your divisions:"
   divisions = Division.all
   divisions.each { |division| puts division.name }
+end
+
+def list_remote
+  puts "Whos working in Guam?"
+  Employee.all.each { |employee| puts employee.name}
+  remote_employee_name = gets.chomp
+  remote_employee_name = Employee.where(name: remote_employee_name).first
+  remote_employee.update(remote: false)
+  puts "'#{remote_employee_name}' works in Guam"
 end
 
 welcome
